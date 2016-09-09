@@ -1,6 +1,7 @@
 package tests
 
 import (
+	"net/http"
 	"testing"
 
 	"github.com/rue-tkashem/echo-api/integration/client"
@@ -13,5 +14,5 @@ func TestEcho_HappyPath_Success(t *testing.T) {
 
 	response := c.Echo(t, "Johny")
 
-	forest.ExpectStatus(t, response, 200)
+	forest.ExpectStatus(t, response, http.StatusOK)
 }
