@@ -1,4 +1,4 @@
-package tests
+package benchmark
 
 import (
 	"flag"
@@ -15,7 +15,7 @@ var (
 )
 
 func setup() {
-	flag.StringVar(&endpoint, "endpoint", "localhost:3000", "target endpoint")
+	flag.StringVar(&endpoint, "endpoint", "http://localhost:3000", "target endpoint")
 	flag.BoolVar(&inproc, "inproc", false, "whether you want to host the service in process")
 
 	fmt.Println("endpoint: ", endpoint)
