@@ -1,4 +1,5 @@
-FROM scratch
+FROM ubuntu:14.04
+
 ARG PIPELINE_LABEL="Unknown"
 LABEL Pipeline=${PIPELINE_LABEL}
 
