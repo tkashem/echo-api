@@ -17,12 +17,14 @@ var (
 func setup() {
 	flag.StringVar(&endpoint, "endpoint", "http://localhost:3000", "target endpoint")
 	flag.BoolVar(&inproc, "inproc", false, "whether you want to host the service in process")
+	flag.Parse()
 
 	fmt.Println("endpoint: ", endpoint)
 	fmt.Println("functional coverage: ", inproc)
 
 	if inproc {
 		go service.ListenAndServe()
+		fmt.Println("hosting the service in process")
 	}
 }
 
