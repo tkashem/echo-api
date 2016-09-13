@@ -13,7 +13,7 @@ var (
 )
 
 func init() {
-	flag.StringVar(&bindTo, "listen", "localhost:3000", "host:port to bind to")
+	flag.StringVar(&bindTo, "listen", ":3000", "host:port to bind to")
 }
 
 // ListenAndServe initializes and starts the service
