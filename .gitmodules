@@ -1,0 +1,12 @@
+[submodule "vendor/github.com/emicklei/forest"]
+	path = vendor/github.com/emicklei/forest
+	url = https://github.com/emicklei/forest
+[submodule "vendor/github.com/wsxiaoys/terminal"]
+	path = vendor/github.com/wsxiaoys/terminal
+	url = https://github.com/wsxiaoys/terminal
+[submodule "vendor/goji.io"]
+	path = vendor/goji.io
+	url = https://github.com/goji/goji
+[submodule "vendor/gopkg.in/xmlpath.v2"]
+	path = vendor/gopkg.in/xmlpath.v2
+	url = https://gopkg.in/xmlpath.v2
