@@ -384,7 +384,16 @@ Also, note that IP address of the virtual machine, You will need this to invoke 
 The following steps will create a docker image and run the service as a container
 ```bash
 # make sure you are at the root folder of the service repo
+
+# We need to cross compile for Linux, since your workstation might be either MacOS or Windows.
+# You can invoke the build.sh script provided at the root folder.
+# build.sh builds a linux executable and copies it into artifacts folder.
+./build.sh
+
+# Now, let's build the docker image 
 docker build --no-cache -t local/echo .
+
+# Run the docker image
 docker run -d -p 3000:3000 --name=echo local/echo
 ```
 
