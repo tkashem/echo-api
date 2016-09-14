@@ -56,20 +56,18 @@ package service
 import (
 	"flag"
 	"net/http"
-
-	"github.com/go-martini/martini"
 )
 
 // ListenAndServe allows the the service to initialize itself and
 // listen on a port so that it can serve incoming request(s)
 func ListenAndServe() {
-	h := getRequestHander()
-	setup(h)
+	// setup and initialization here
+	
 	http.ListenAndServe(bindTo, m)
 }
 ```
 
-* Either *ListenAndServe* or *BindToRoutingKeyAndServe* is the only function exposed by the *service* package.
+* *ListenAndServe* is the only function exposed by the *service* package.
 * Any other package(s) defined inside the *service* folder should be internal for the following reasons -
   * These packages are interna details of this service and meant to be used by the *service* package exclusively. Shared packages should not live under *service* folder.
   * If the integration tests reside in the same repo, we want to make sure that test code can't access these internal data structures and logic.
