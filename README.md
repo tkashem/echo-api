@@ -214,7 +214,7 @@ That's how we can run the integration tests -
 ```bash
 # The current working directory is root of the repo.
 cd integration/tests
-go test -v -endpoint=http://server:3000
+go test -v -endpoint=http://{server}:3000
 ```
 
 ```
@@ -225,8 +225,12 @@ The code snippet below shows how we add custom flags to our test suite.
 ```go
 // setup_test.go
 
+var (
+	endpoint string
+)
+
 func setup() {
-	endpointFlagPtr := flag.String("endpoint", "", "Service endpoint under test")
+	flag.StringVar(&endpoint, "endpoint", "http://localhost:3000", "target endpoint")
 	flag.Parse()
 }
 
@@ -243,7 +247,7 @@ func TestMain(m *testing.M) {
 }
 ```
 
-GoCD pipeline specific:
+CI/CD pipeline specific:
 The integration tests will be compiled into a binary. The binary will be packaged into a docker image and then it will be executed by a GoCD agent.
 
 ```bash
@@ -286,11 +290,15 @@ import (
 	"github.com/rue-tkashem/echo-api/service"
 )
 
+var (
+	inproc   bool
+)
+
 func setup() {
-	inprocFlagPtr := flag.String("inproc", false, "Indicates whether the service will be hosted in process")
+	flag.BoolVar(&inproc, "inproc", false, "whether you want to host the service in process")
 	flag.Parse()
 
-	if *inprocFlagPtr {
+	if inproc {
 		// the service package exposes a function that allows us to host the service in process
 		go service.ListenAndServe()
 	}
@@ -348,31 +356,34 @@ If docker is not natively installed on your workstation, we can use docker tool 
 You can install docker tool chain from here - https://docs.docker.com/engine/installation/mac/.
 ```
 ```bash
-To check whether docker machine is installed, run the following command
+# To check whether docker machine is installed, run the following command
 docker-machine ls
 
-If this command works, this means that docker machine has been setup successfully. The next steps are to create a linux virtual machine using docker tool chain.
-To know more about docker machine, visit https://docs.docker.com/machine/overview/
+# If this command works, this means that docker machine has been setup successfully. 
+# The next steps are to create a linux virtual machine using docker tool chain.
+# To know more about docker machine, visit https://docs.docker.com/machine/overview/
 
-Open up a terminal and execute the following commands -
-docker-machine create --driver virtual box local
+# Open up a terminal and execute the following commands -
+docker-machine create --driver virtualbox local
 docker-machine env local
 eval $(docker-machine env local)   
 
-This will setup a virtual machine with docker daemon running, and will connect your local docker client to the remote daemon.
+# This will setup a linux virtual machine with the latest docker daemon running on it, 
+# and will connect your local docker client to the remote daemon.
 
 docker-machine ls
-
+```
+```
 NAME    ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER    ERRORS
-
 local   *        virtualbox   Running   tcp://192.168.99.100:2376           v1.12.1
 
 If you see the above, it implies docker machine setup has been successful
+Also, note that IP address of the virtual machine, You will need this to invoke the service later.
 ```
 
 The following steps will create a docker image and run the service as a container
 ```bash
-# make sure you are at the root folder of the service
+# make sure you are at the root folder of the service repo
 docker build --no-cache -t local/echo .
 docker run -d -p 3000:3000 --name=echo local/echo
 ```
@@ -382,7 +393,6 @@ Run the following command to check if the service is running as a container
 docker ps
 ```
 You should see that a container named "echo" is runnning.
-
 Now, to invoke the service from a terminal on your workstation, do the following
 ```bash
 # get the IP address of the virtual machine "local"
