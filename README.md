@@ -1,6 +1,6 @@
 ## Objective
 
-This repo is a "draft" reference for presentation, application or a task layer component. The goal is to demonstrate how the production code and tests are physically structured and logically separated. The primary objective of the conventions followed here are -
+This repo is a "draft" reference for how we can write an HTTP service in Go. The goal is to demonstrate how the production code and tests are physically structured and logically separated. The primary objective of the conventions followed here are -
 
 * Clearly defined physical structures of code.
 * Maintain clear separation of concerns among different layers of code within a component. For example we want to  maintain a defined interface among different business layers (transport, business logic or data layer if applicable) for a component. No layer should have access to internal state or logic of any other layer. The communication between two layers must be gated via well defined interface so that each layer is testable independently.
@@ -132,7 +132,7 @@ or give it a special name
 This will create an image same as the repo name and put it in your bin folder.    
 ```
 
-GoCD specific
+CI/CD pipeline specific
 ```
 We will create static go binaries when we build.
 We will inject version number, commit hash, pipeline id into the image when we build the binary
@@ -143,7 +143,7 @@ We will inject version number, commit hash, pipeline id into the image when we b
 Static analysis will be executed on every go file in the repository. The following folders are excluded -
 * *vendor* folder as specified above
 
-GoCD pipeline specific:
+CI/CD pipeline specific:
 ```bash
 # This shows an example of how we will execute a static analysis tool that accepts a package as input
 # The current folder is the root folder of the repo.
@@ -188,7 +188,7 @@ If you want to enable coverage then you might need to run unit tests for each pa
 vendor folder is excluded from any unit tests
 ```
 
-GoCD pipeline specific:
+CI/CD pipeline specific:
 ```bash
 # The current working directory is root of the repo.
 # All packages except for those under the vendor and integration folders are in scope for unit testing.
@@ -248,7 +248,7 @@ func TestMain(m *testing.M) {
 ```
 
 CI/CD pipeline specific:
-The integration tests will be compiled into a binary. The binary will be packaged into a docker image and then it will be executed by a GoCD agent.
+The integration tests will be compiled into a binary. The binary will be packaged into a docker image and then it will be executed by a CI/CD agent.
 
 ```bash
 # The current working directory is root of the repo.
