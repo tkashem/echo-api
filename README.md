@@ -14,6 +14,13 @@ If you are on Go 1.5, you will need to enable experimental vendoring by setting 
 If you are using Go 1.6 and above, you are all set.
 ```
 
+```bash
+# Dependencies - You will need to get the following packages
+go get golang.org/x/net 
+go get goji.io
+go get github.com/stretchr/testify
+go get github.com/emicklei/forest
+```
 
 ## Structure
 
