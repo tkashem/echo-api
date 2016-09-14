@@ -343,6 +343,57 @@ go build -race -o datarace
 This will generate an instrumented build with data race detection enabled.
 
 
+Run as a container
+------------------
+If docker is not natively installed on your workstation, we can use docker tool chain ( docker machine ) to go through this exercise.
+```
+You can install docker tool chain from here - https://docs.docker.com/engine/installation/mac/.
+```
+```bash
+To check whether docker machine is installed, run the following command
+docker-machine ls
+
+If this command works, this means that docker machine has been setup successfully. The next steps are to create a linux virtual machine using docker tool chain.
+To know more about docker machine, visit https://docs.docker.com/machine/overview/
+
+Open up a terminal and execute the following commands -
+docker-machine create --driver virtual box local
+docker-machine env local
+eval $(docker-machine env local)   
+
+This will setup a virtual machine with docker daemon running, and will connect your local docker client to the remote daemon.
+
+docker-machine ls
+
+NAME    ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER    ERRORS
+
+local   *        virtualbox   Running   tcp://192.168.99.100:2376           v1.12.1
+
+If you see the above, it implies docker machine setup has been successful
+```
+
+The following steps will create a docker image and run the service as a container
+```bash
+# make sure you are at the root folder of the service
+docker build --no-cache -t local/echo .
+docker run -d -p 3000:3000 --name=echo local/echo
+```
+
+Run the following command to check if the service is running as a container
+```bash
+docker ps
+```
+You should see that a container named "echo" is runnning.
+
+Now, to invoke the service from a terminal on your workstation, do the following
+```bash
+# get the IP address of the virtual machine "local"
+docker-machine ls
+
+curl http://{ip address}:3000/echo/foo
+```
+
+
 go doc
 ------
 1. Run go doc server locally, it automatically detects your code in GOPATH.
