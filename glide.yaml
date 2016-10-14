@@ -1,0 +1,13 @@
+package: github.com/rue-tkashem/echo-api
+import:
+- package: github.com/emicklei/forest
+- package: goji.io
+  subpackages:
+  - pat
+- package: golang.org/x/net
+  subpackages:
+  - context
+testImport:
+- package: github.com/stretchr/testify
+  subpackages:
+  - assert

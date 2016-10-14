@@ -1,0 +1,36 @@
+hash: 8fd4ce6d1a59568a33c8ab757b3194a919974040f1bdc49567f8571bda3447dc
+updated: 2016-10-14T15:56:43.458458948-04:00
+imports:
+- name: github.com/emicklei/forest
+  version: 68b53f67a2676bd9a404066681036ef0fc906fa7
+- name: github.com/wsxiaoys/terminal
+  version: 0940f3fc43a0ed42d04916b1c04578462c650b09
+  subpackages:
+  - color
+- name: goji.io
+  version: bc2e9e7dc2769805d1b6ce4dc48ec23a03ae82ec
+  subpackages:
+  - internal
+  - pat
+  - pattern
+- name: golang.org/x/net
+  version: 8b4af36cd21a1f85a7484b49feb7c79363106d8e
+  subpackages:
+  - context
+  - html
+  - html/atom
+- name: gopkg.in/xmlpath.v2
+  version: 860cbeca3ebcc600db0b213c0e83ad6ce91f5739
+testImports:
+- name: github.com/davecgh/go-spew
+  version: 6d212800a42e8ab5c146b8ace3490ee17e5225f9
+  subpackages:
+  - spew
+- name: github.com/pmezard/go-difflib
+  version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
+  subpackages:
+  - difflib
+- name: github.com/stretchr/testify
+  version: 976c720a22c8eb4eb6a0b4348ad85ad12491a506
+  subpackages:
+  - assert
