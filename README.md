@@ -415,6 +415,9 @@ Now, to invoke the service from a terminal on your workstation, do the following
 docker-machine ls
 
 curl http://{ip address}:3000/echo/foo
+
+# or, if you are using docjer-machine for this example
+curl http://$(docker-machine ip local):3000/echo/foo
 ```
 
 
