@@ -2,7 +2,7 @@
     "kind": "Template",
     "apiVersion": "v1",
     "metadata": {
-      "name": "microservice-example",
+      "name": "echo",
       "annotations": {
         "openshift.io/display-name": "Self hosted micro service in Go",
         "description": "An example of self hosted micro service in Go. For more information about using this template, including OpenShift considerations, see https://github.com/tkashem/echo-api/blob/master/README.md.",
@@ -16,7 +16,7 @@
     },
     "message": "The following service(s) have been created in your project: ${NAME}.\n\nFor more information about using this template, including OpenShift considerations, see https://github.com/tkashem/echo-api/blob/master/README.md.",
     "labels": {
-      "template": "microservice-example"
+      "template": "echo"
     },
     "objects": [
       {
@@ -164,9 +164,9 @@
       {
         "name": "ECHO_VERSION",
         "displayName": "Echo Microservice Version",
-        "description": "Version of NGINX image to be used (1.12 by default).",
+        "description": "Version of the microservice to be used (1.0 by default).",
         "required": true,
-        "value": "1.12"
+        "value": "1.0"
       },
       {
         "name": "MEMORY_LIMIT",
